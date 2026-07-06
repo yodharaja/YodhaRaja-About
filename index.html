@@ -1,404 +1,394 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <!-- this is a pull request-->
+  <!--  i repeat this is a pull request -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
     <title>Yodha Raja</title>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
 
-        :root {
-            --bg: #030712;
-            --glass: rgba(255, 255, 255, .03);
-            --border: rgba(255, 255, 255, .08);
-            --text: #ffffff;
-            --muted: #6b7280;
-            --ring-base: min(380px, 80vw);
-        }
+      :root {
+        --bg: #030712;
+        --glass: rgba(255, 255, 255, 0.03);
+        --border: rgba(255, 255, 255, 0.08);
+        --text: #ffffff;
+        --muted: #6b7280;
+        --ring-base: min(380px, 80vw);
+      }
 
-        body {
-            min-height: 100dvh;
-            overflow: hidden;
-            background: var(--bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--text);
-            position: relative;
-            padding: 1.5rem;
-            touch-action: manipulation;
-        }
+      body {
+        min-height: 100dvh;
+        overflow: hidden;
+        background: var(--bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--text);
+        position: relative;
+        padding: 1.5rem;
+        touch-action: manipulation;
+      }
 
-        /* Ambient glowing background blobs */
-        body::before,
-        body::after {
-            content: "";
-            position: absolute;
-            width: min(650px, 90vw);
-            height: min(650px, 90vw);
-            border-radius: 50%;
-            filter: blur(140px);
-            opacity: .18;
-            z-index: 0;
-            pointer-events: none;
-            animation: float 14s ease-in-out infinite;
-        }
+      /* Ambient glowing background blobs */
+      body::before,
+      body::after {
+        content: "";
+        position: absolute;
+        width: min(650px, 90vw);
+        height: min(650px, 90vw);
+        border-radius: 50%;
+        filter: blur(140px);
+        opacity: 0.18;
+        z-index: 0;
+        pointer-events: none;
+        animation: float 14s ease-in-out infinite;
+      }
 
-        body::before {
-            background: #2563eb;
-            left: -150px;
-            top: -150px;
-        }
+      body::before {
+        background: #2563eb;
+        left: -150px;
+        top: -150px;
+      }
 
-        body::after {
-            background: #7c3aed;
-            right: -150px;
-            bottom: -150px;
-            animation-delay: -7s;
-        }
+      body::after {
+        background: #7c3aed;
+        right: -150px;
+        bottom: -150px;
+        animation-delay: -7s;
+      }
 
-        /* Background grid */
-        .grid {
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(rgba(255, 255, 255, .02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, .02) 1px, transparent 1px);
-            background-size: 50px 50px;
-            mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
-            -webkit-mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
-            z-index: 0;
-            pointer-events: none;
-        }
+      /* Background grid */
+      .grid {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 50px 50px;
+        mask-image: radial-gradient(
+          circle at center,
+          black 35%,
+          transparent 90%
+        );
+        -webkit-mask-image: radial-gradient(
+          circle at center,
+          black 35%,
+          transparent 90%
+        );
+        z-index: 0;
+        pointer-events: none;
+      }
 
-        .scene {
-            perspective: 1800px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
-        }
+      .scene {
+        perspective: 1800px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+      }
 
-        /* Responsive glassmorphic card container */
+      /* Responsive glassmorphic card container */
+      .card {
+        width: min(92vw, 850px);
+        height: 500px;
+        position: relative;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border-radius: 36px;
+        overflow: hidden;
+        transform-style: preserve-3d;
+        transition: transform 0.12s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.02),
+          0 30px 80px rgba(0, 0, 0, 0.65);
+      }
+
+      /* Vertical layout adjustment for mobile viewports */
+      @media (max-width: 767px) {
         .card {
-            width: min(92vw, 850px);
-            height: 500px;
-            position: relative;
-            background: rgba(255, 255, 255, .03);
-            border: 1px solid var(--border);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-radius: 36px;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            transition: transform .12s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow:
-                0 0 0 1px rgba(255, 255, 255, .02),
-                0 30px 80px rgba(0, 0, 0, .65);
+          width: min(90vw, 360px);
+          height: 480px;
+          border-radius: 28px;
         }
-
-        /* Vertical layout adjustment for mobile viewports */
-        @media (max-width: 767px) {
-            .card {
-                width: min(90vw, 360px);
-                height: 480px;
-                border-radius: 28px;
-            }
-            :root {
-                --ring-base: min(260px, 70vw);
-            }
+        :root {
+          --ring-base: min(260px, 70vw);
         }
+      }
 
-        /* Top-left & bottom-right lighting highlights */
-        .card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(135deg,
-                    rgba(255, 255, 255, .15),
-                    transparent 25%,
-                    transparent 75%,
-                    rgba(255, 255, 255, .04));
-            pointer-events: none;
-            z-index: 2;
-        }
+      /* Top-left & bottom-right lighting highlights */
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.15),
+          transparent 25%,
+          transparent 75%,
+          rgba(255, 255, 255, 0.04)
+        );
+        pointer-events: none;
+        z-index: 2;
+      }
 
-        /* Ambient interior card glow */
-        .card::after {
-            content: "";
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            background: #2563eb;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: .12;
-            top: -150px;
-            right: -150px;
-            pointer-events: none;
-        }
+      /* Ambient interior card glow */
+      .card::after {
+        content: "";
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        background: #2563eb;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.12;
+        top: -150px;
+        right: -150px;
+        pointer-events: none;
+      }
 
-        /* Logo Brand styling */
+      /* Logo Brand styling */
+      .logo {
+        position: absolute;
+        top: 35px;
+        left: 40px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        color: #9ca3af;
+        text-transform: uppercase;
+        z-index: 3;
+      }
+
+      @media (max-width: 767px) {
         .logo {
-            position: absolute;
-            top: 35px;
-            left: 40px;
-            font-size: .8rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            color: #9ca3af;
-            text-transform: uppercase;
-            z-index: 3;
+          top: 28px;
+          left: 30px;
+          font-size: 0.75rem;
+          letter-spacing: 2px;
         }
+      }
 
-        @media (max-width: 767px) {
-            .logo {
-                top: 28px;
-                left: 30px;
-                font-size: .75rem;
-                letter-spacing: 2px;
-            }
-        }
+      /* Centered welcome content */
+      .content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateZ(60px);
+        position: relative;
+        z-index: 1;
+      }
 
-        /* Centered welcome content */
-        .content {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transform: translateZ(60px);
-            position: relative;
-            z-index: 1;
-        }
+      /* Status Badge */
+      .badge {
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(96, 165, 250, 0.2);
+        background: rgba(96, 165, 250, 0.06);
+        color: #93c5fd;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
 
-        /* Status Badge */
+      @media (max-width: 767px) {
         .badge {
-            padding: 10px 18px;
-            border-radius: 999px;
-            border: 1px solid rgba(96, 165, 250, .2);
-            background: rgba(96, 165, 250, .06);
-            color: #93c5fd;
-            font-size: .75rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
+          padding: 8px 14px;
+          font-size: 0.7rem;
+          margin-bottom: 15px;
         }
+      }
 
-        @media (max-width: 767px) {
-            .badge {
-                padding: 8px 14px;
-                font-size: .7rem;
-                margin-bottom: 15px;
-            }
-        }
+      /* Dynamic Title */
+      .title {
+        font-size: clamp(3.8rem, 11vw, 6.5rem);
+        font-weight: 900;
+        line-height: 0.95;
+        letter-spacing: -2px;
+        background: linear-gradient(180deg, #ffffff, #dbeafe 60%, #a5b4fc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
 
-        /* Dynamic Title */
-        .title {
-            font-size: clamp(3.8rem, 11vw, 6.5rem);
-            font-weight: 900;
-            line-height: .95;
-            letter-spacing: -2px;
-            background:
-                linear-gradient(180deg,
-                    #ffffff,
-                    #dbeafe 60%,
-                    #a5b4fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+      /* Dynamic Subtitle */
+      .subtitle {
+        margin-top: 15px;
+        font-size: 0.9rem;
+        letter-spacing: 7px;
+        text-transform: uppercase;
+        color: #6b7280;
+        text-indent: 7px; /* Centers text with letter spacing */
+      }
 
-        /* Dynamic Subtitle */
+      @media (max-width: 767px) {
         .subtitle {
-            margin-top: 15px;
-            font-size: .9rem;
-            letter-spacing: 7px;
-            text-transform: uppercase;
-            color: #6b7280;
-            text-indent: 7px; /* Centers text with letter spacing */
+          font-size: 0.8rem;
+          letter-spacing: 5px;
+          text-indent: 5px;
+          margin-top: 10px;
         }
+      }
 
-        @media (max-width: 767px) {
-            .subtitle {
-                font-size: .8rem;
-                letter-spacing: 5px;
-                text-indent: 5px;
-                margin-top: 10px;
-            }
-        }
+      /* Concentric Vector Rings */
+      .ring {
+        position: absolute;
+        width: var(--ring-base);
+        height: var(--ring-base);
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 0;
+      }
 
-        /* Concentric Vector Rings */
-        .ring {
-            position: absolute;
-            width: var(--ring-base);
-            height: var(--ring-base);
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, .05);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 0;
-        }
+      .ring:nth-child(2) {
+        width: calc(var(--ring-base) * 1.25);
+        height: calc(var(--ring-base) * 1.25);
+        opacity: 0.6;
+      }
 
-        .ring:nth-child(2) {
-            width: calc(var(--ring-base) * 1.25);
-            height: calc(var(--ring-base) * 1.25);
-            opacity: .6;
-        }
+      .ring:nth-child(3) {
+        width: calc(var(--ring-base) * 1.5);
+        height: calc(var(--ring-base) * 1.5);
+        opacity: 0.3;
+      }
 
-        .ring:nth-child(3) {
-            width: calc(var(--ring-base) * 1.5);
-            height: calc(var(--ring-base) * 1.5);
-            opacity: .3;
-        }
+      /* Page Footer */
+      .footer {
+        position: absolute;
+        bottom: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.7rem;
+        letter-spacing: 3.5px;
+        text-transform: uppercase;
+        color: #4b5563;
+        z-index: 3;
+        white-space: nowrap;
+      }
 
-        /* Page Footer */
+      @media (max-width: 767px) {
         .footer {
-            position: absolute;
-            bottom: 35px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: .7rem;
-            letter-spacing: 3.5px;
-            text-transform: uppercase;
-            color: #4b5563;
-            z-index: 3;
-            white-space: nowrap;
+          bottom: 28px;
+          font-size: 0.65rem;
+          letter-spacing: 2.5px;
         }
+      }
 
-        @media (max-width: 767px) {
-            .footer {
-                bottom: 28px;
-                font-size: .65rem;
-                letter-spacing: 2.5px;
-            }
-        }
+      /* Live status green dot pulse */
+      .dot {
+        position: absolute;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #22c55e;
+        top: 39px;
+        right: 40px;
+        box-shadow: 0 0 12px #22c55e;
+        z-index: 3;
+        animation: pulse-dot 2.5s infinite;
+      }
 
-        /* Live status green dot pulse */
+      @media (max-width: 767px) {
         .dot {
-            position: absolute;
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: #22c55e;
-            top: 39px;
-            right: 40px;
-            box-shadow: 0 0 12px #22c55e;
-            z-index: 3;
-            animation: pulse-dot 2.5s infinite;
+          top: 31px;
+          right: 30px;
+          width: 8px;
+          height: 8px;
         }
+      }
 
-        @media (max-width: 767px) {
-            .dot {
-                top: 31px;
-                right: 30px;
-                width: 8px;
-                height: 8px;
-            }
+      @keyframes float {
+        50% {
+          transform: translateY(60px);
         }
+      }
 
-        @keyframes float {
-            50% {
-                transform: translateY(60px);
-            }
+      @keyframes pulse-dot {
+        0% {
+          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
         }
-
-        @keyframes pulse-dot {
-            0% {
-                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
-            }
+        70% {
+          box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
         }
+        100% {
+          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="grid"></div>
 
     <div class="scene">
+      <div class="card" id="card">
+        <div class="dot"></div>
 
-        <div class="card" id="card">
+        <div class="logo">Yodha Raja</div>
 
-            <div class="dot"></div>
+        <div class="content">
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="ring"></div>
 
-            <div class="logo">
-                Yodha Raja
-            </div>
+          <div class="badge">System Online</div>
 
-            <div class="content">
+          <h1 class="title">RAJA</h1>
 
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-
-                <div class="badge">
-                    System Online
-                </div>
-
-                <h1 class="title">
-                    RAJA
-                </h1>
-
-                <div class="subtitle">
-                    Cloud Functions
-                </div>
-
-            </div>
-
-            <div class="footer">
-                Internal Platform
-            </div>
-
+          <div class="subtitle">Cloud Functions</div>
         </div>
 
+        <div class="footer">Internal Platform</div>
+      </div>
     </div>
 
     <script>
-        const card = document.getElementById("card");
+      const card = document.getElementById("card");
 
-        // Apply 3D card tilt only on hover-capable pointer devices
-        if (window.matchMedia("(hover: hover)").matches) {
-            card.addEventListener("mousemove", (e) => {
-                const rect = card.getBoundingClientRect();
+      // Apply 3D card tilt only on hover-capable pointer devices
+      if (window.matchMedia("(hover: hover)").matches) {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
 
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
 
-                // Max rotation bounded to elegant 12 degrees
-                const rotateY = ((x / rect.width) - 0.5) * 12;
-                const rotateX = ((y / rect.height) - 0.5) * -12;
+          // Max rotation bounded to elegant 12 degrees
+          const rotateY = (x / rect.width - 0.5) * 12;
+          const rotateX = (y / rect.height - 0.5) * -12;
 
-                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
+          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
 
-            card.addEventListener("mouseleave", () => {
-                card.style.transform = "rotateX(0deg) rotateY(0deg)";
-            });
-        }
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "rotateX(0deg) rotateY(0deg)";
+        });
+      }
     </script>
-
-</body>
-
+  </body>
 </html>
